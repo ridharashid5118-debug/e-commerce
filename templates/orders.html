@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:#eef2f7;
+            padding:40px;
+        }
+
+        h1{
+            text-align:center;
+            color:#111827;
+            margin-bottom:40px;
+        }
+
+        .orders-container{
+            max-width:900px;
+            margin:auto;
+        }
+
+        .order-card{
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            margin-bottom:20px;
+            box-shadow:0 8px 20px rgba(0,0,0,.08);
+            transition:.3s;
+        }
+
+        .order-card:hover{
+            transform:translateY(-5px);
+        }
+
+        .username{
+            color:#2563eb;
+            font-size:22px;
+            font-weight:600;
+            margin-bottom:15px;
+        }
+
+        .product{
+            color:#111827;
+            margin-bottom:10px;
+            font-size:16px;
+        }
+
+        .address{
+            color:#6b7280;
+            line-height:1.6;
+        }
+
+        .back-btn{
+            display:block;
+            width:220px;
+            margin:30px auto;
+            text-align:center;
+            text-decoration:none;
+            background:#2563eb;
+            color:white;
+            padding:12px;
+            border-radius:10px;
+            transition:.3s;
+        }
+
+        .back-btn:hover{
+            background:#1d4ed8;
+        }
+
+        .empty{
+            text-align:center;
+            color:#6b7280;
+            font-size:18px;
+        }
+        .cancel-btn{
+        display:inline-block;
+        margin-top:15px;
+        text-decoration:none;
+        background:#ef4444;
+        color:white;
+        padding:10px 15px;
+        border-radius:8px;
+        transition:.3s;
+    }
+
+    .cancel-btn:hover{
+        background:#dc2626;
+    }
+
+    </style>
+
+</head>
+<body>
+
+    <h1>Customer Orders</h1>
+
+    <div class="orders-container">
+
+        {% for order in orders %}
+
+        <div class="order-card">
+
+            <div class="username">
+                {{ order.user.username }}
+            </div>
+
+            <div class="product">
+                <strong>Product:</strong>
+                {{ order.product.name }}
+            </div>
+
+            <div class="address">
+                <strong>Delivery Address:</strong><br>
+                {{ order.address }}
+            </div>
+            <a href="{% url 'cancel_order' order.id %}"class="cancel-btn">
+                Cancel Order
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <p class="empty">
+            No orders available.
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+    <a href="{% url 'home' %}" class="back-btn">
+        Back to Home
+    </a>
+
+</body>
+</html>

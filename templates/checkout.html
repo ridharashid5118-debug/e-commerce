@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:#eef2f7;
+        }
+
+        .checkout-box{
+            width:500px;
+            background:white;
+            padding:40px;
+            border-radius:20px;
+            box-shadow:0 10px 30px rgba(0,0,0,.1);
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:25px;
+            color:#111827;
+        }
+
+        .product{
+            background:#f8fafc;
+            padding:20px;
+            border-radius:12px;
+            margin-bottom:25px;
+        }
+
+        .product h3{
+            color:#111827;
+            margin-bottom:10px;
+        }
+
+        .price{
+            color:#16a34a;
+            font-size:24px;
+            font-weight:bold;
+        }
+
+        textarea{
+            width:100%;
+            height:120px;
+            padding:15px;
+            border:1px solid #d1d5db;
+            border-radius:10px;
+            resize:none;
+            margin-bottom:20px;
+            font-size:15px;
+        }
+
+        textarea:focus{
+            outline:none;
+            border-color:#2563eb;
+        }
+
+        button{
+            width:100%;
+            padding:15px;
+            border:none;
+            border-radius:10px;
+            background:#2563eb;
+            color:white;
+            font-size:16px;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        button:hover{
+            background:#1d4ed8;
+        }
+
+        .back{
+            display:block;
+            text-align:center;
+            margin-top:15px;
+            text-decoration:none;
+            color:#2563eb;
+            font-weight:500;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="checkout-box">
+
+    <h1>Checkout</h1>
+
+    <div class="product">
+
+        <h3>{{ product.name }}</h3>
+
+        <p class="price">
+            ₹{{ product.price }}
+        </p>
+
+    </div>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <textarea
+            name="address"
+            placeholder="Enter Delivery Address"
+            required>
+        </textarea>
+
+        <button type="submit">
+            Place Order
+        </button>
+
+    </form>
+
+    <a href="{% url 'home' %}" class="back">
+        ← Continue Shopping
+    </a>
+
+</div>
+
+</body>
+</html>
