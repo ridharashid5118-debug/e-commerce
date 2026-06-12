@@ -125,9 +125,11 @@
                 <strong>Delivery Address:</strong><br>
                 {{ order.address }}
             </div>
-            <a href="{% url 'cancel_order' order.id %}"class="cancel-btn">
-                Cancel Order
-            </a>
+            {% if order.user == request.user %}
+                <a href="{% url 'cancel_order' order.id %}" class="cancel-btn">
+                    Cancel Order
+                </a>
+            {% endif %}
 
         </div>
 
